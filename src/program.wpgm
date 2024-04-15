@@ -1,0 +1,18 @@
+import wollok.game.*
+import auto.*
+import pered.*
+
+program autitosGame {
+	game.width(14)
+	game.height(8)
+	game.boardGround("empedrado.jpg")
+		// agregamos a nuestro objeto auto
+	game.addVisualCharacter(autoRojo)
+	game.addVisual(autoAzul)
+	game.onTick(1000, "move", { => autoAzul.move() })
+	game.whenCollideDo(autoRojo, { elemento =>
+		game.say(autoRojo, autoRojo.choque())
+		game.removeTickEvent("move")
+	})
+	game.start()
+}
